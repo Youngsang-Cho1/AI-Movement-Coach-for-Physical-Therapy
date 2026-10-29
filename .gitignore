@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.egg-info/
+.pytest_cache/
+models/*.task
+runs/
+results/
+# raw volunteer videos stay local (privacy); share via consented channel
+data/videos/
+data/consent/
+.DS_Store
