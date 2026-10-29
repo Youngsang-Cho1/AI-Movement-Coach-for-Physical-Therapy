@@ -1,0 +1,5 @@
+[
+  {"id": "v1_knee_set1", "video": "data/videos/v1_knee_set1.mp4", "volunteer": "v1",
+   "split": "dev", "exercise": "knee_extension", "lighting": "normal", "camera": "side",
+   "labels": "data/labels/v1_knee_set1.json"}
+]
