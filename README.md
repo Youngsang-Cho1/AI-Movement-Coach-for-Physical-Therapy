@@ -12,6 +12,7 @@ pip install -e ".[dev]"
 scripts/download_model.sh
 pytest
 ```
+If `import coach` fails on macOS (hidden `.pth`): `chflags nohidden .venv/lib/python3*/site-packages/*.pth`.
 
 ## Run
 ```bash
@@ -22,6 +23,12 @@ coach shoulder_raise --source 0                       # webcam, front view
 Therapist targets live in `configs/<exercise>.json` (e.g. `target_angle`, `hold_s`).
 When tracking is unreliable (low landmark confidence, no person, jumps) the app withholds
 movement advice and asks you to adjust camera/lighting.
+
+## Record test clips
+```bash
+python -m coach.tools.record --volunteer v1 --exercise knee_extension --set 1 --camera side
+```
+Asks for consent confirmation first; clips stay local (git-ignored).
 
 ## Layout
 - `src/coach/exercises/` — per-exercise state machines (reps, hold, tempo, lean)
