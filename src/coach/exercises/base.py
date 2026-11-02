@@ -65,6 +65,7 @@ class Exercise:
 
     def _reset_motion(self):
         self.phase = self.rest_phase
+        self.armed = False   # count reps only after the rest pose has been seen
         self._filters = {}
 
     # --- subclass hooks -------------------------------------------------

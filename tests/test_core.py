@@ -116,3 +116,16 @@ def test_shoulder_trunk_lean_flagged_once():
         ev += ex.update(ti, shoulder_frame(vi, lean_deg=15 if 1.5 < ti < 5 else 0)).events
     assert _codes(ev).count("trunk_lean") == 1
     assert "good_rep" not in _codes(ev)
+
+
+@pytest.mark.parametrize("name,make,rest,active", [
+    ("knee_extension", knee_frame, 90, 170),
+    ("sit_to_stand", knee_frame, 95, 170),
+    ("shoulder_raise", shoulder_frame, 5, 90),
+])
+def test_no_rep_when_first_seen_mid_motion(name, make, rest, active):
+    """e.g. a scene cut onto an already-standing person must not count a rep."""
+    ex = make_exercise(name)
+    sig = [(0, active), (2, active), (3, rest), (4, rest)]
+    ev = run(ex, *ramp(sig), make)
+    assert ex.reps == 0 and ev == []

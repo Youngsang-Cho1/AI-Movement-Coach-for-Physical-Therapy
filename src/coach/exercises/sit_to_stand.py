@@ -47,7 +47,8 @@ class SitToStand(Exercise):
     def step(self, t, m):
         c, a, ev = self.cfg, m["angle"], []
         if self.phase == "seated":
-            if a > c.sit_angle:
+            self.armed = self.armed or a < c.sit_angle
+            if self.armed and a > c.sit_angle:
                 self.phase, self._peak, self._t0, self._ascent_ok = "rising", a, t, True
                 self.attempt += 1
         elif self.phase == "rising":

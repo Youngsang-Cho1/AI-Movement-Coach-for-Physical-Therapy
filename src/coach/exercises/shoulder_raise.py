@@ -54,7 +54,8 @@ class ShoulderRaise(Exercise):
     def step(self, t, m):
         c, e, ev = self.cfg, m["elevation"], []
         if self.phase == "down":
-            if e > c.start_angle:
+            self.armed = self.armed or e < c.start_angle
+            if self.armed and e > c.start_angle:
                 self.phase, self._peak, self._lean_flagged = "raising", e, False
                 self.attempt += 1
         elif self.phase == "raising":

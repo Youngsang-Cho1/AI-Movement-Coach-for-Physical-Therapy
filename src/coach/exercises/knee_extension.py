@@ -46,7 +46,8 @@ class KneeExtension(Exercise):
     def step(self, t, m):
         c, a, ev = self.cfg, m["angle"], []
         if self.phase == "rest":
-            if a > c.start_angle:
+            self.armed = self.armed or a < c.start_angle
+            if self.armed and a > c.start_angle:
                 self.phase, self._peak = "extending", a
                 self.attempt += 1
         elif self.phase == "extending":
